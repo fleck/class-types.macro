@@ -10,7 +10,7 @@ export default function postcssClassTypes({ directory = "" } = {}) {
   fs.outputFile(
     nodePath.join(dest, "class-types.d.ts"),
     `\
-declare module "class-types/macro" {
+declare module "ct.macro" {
   const _default: (...args: ClassNames[]) => string;
 
   export default _default;
