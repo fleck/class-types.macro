@@ -1,27 +1,66 @@
-# TSDX Bootstrap
+# ct.macro
 
-This project was bootstrapped with [TSDX](https://github.com/jaredpalmer/tsdx).
+Types for your CSS classes. This is a combination of a PostCSS plugin and babel macro.
 
-## Local Development
+## Setup
+First, add this package:
+```bash
+yarn add ct.macro
+```
 
-Below is a list of commands you will probably find useful.
+You may need to add the babel macros plugin: https://github.com/kentcdodds/babel-plugin-macros/blob/master/other/docs/user.md Some projects such as create react app may already have this installed.
 
-### `npm start` or `yarn start`
+Next configure the PostCSS plugin, you'll want to add this after tailwind (or similar library), but before purgeCSS or any libraries that optimize your CSS builds.
 
-Runs the project in development/watch mode. Your project will be rebuilt upon changes. TSDX has a special logger for you convenience. Error messages are pretty printed and formatted for compatibility VS Code's Problems tab.
+```js
+// postcss.config.js
 
-<img src="https://user-images.githubusercontent.com/4060187/52168303-574d3a00-26f6-11e9-9f3b-71dbec9ebfcb.gif" width="600" />
+module.exports = {
+  plugins: [
+    require('tailwindcss'),
 
-Your library will be rebuilt if you make edits.
+    require('ct.macro').postcss(),
 
-### `npm run build` or `yarn build`
+    require('autoprefixer'),
+    ...process.env.NODE_ENV === 'production'
+      ? [purgecss]
+      : []
+  ]
+}
+```
 
-Bundles the package to the `dist` folder.
-The package is optimized and bundled with Rollup into multiple formats (CommonJS, UMD, and ES Module).
+## TypeScript types for your tailwind classes
 
-<img src="https://user-images.githubusercontent.com/4060187/52168322-a98e5b00-26f6-11e9-8cf6-222d716b75ef.gif" width="600" />
+Confidently make changes to your tailwind config.
 
-### `npm test` or `yarn test`
+Ever make a change like this?
+```js
+// tailwind.config.js
 
-Runs the test watcher (Jest) in an interactive mode.
-By default, runs tests related to files changed since the last commit.
+module.exports = {
+  theme: {
+    extend: {
+      colors: {
+        blue: {
+          '900': '#1e3656',
+        }
+      }
+    }
+  }
+}
+```
+and find out later (in prod) you accidentally wiped out blue shades 100 - 800? this plugin guards against that!
+
+![type error from missing class](assets/missing-class.png)
+
+## Zero runtime cost
+
+function calls are compiled to strings via babel macro, thanks Kent!
+
+```jsx
+// this:
+<div className={cl("bg-blue-200", "flex", "mx-auto")} />
+
+// gets compiled to this:
+<div className="bg-blue-200 flex mx-auto" />
+```
