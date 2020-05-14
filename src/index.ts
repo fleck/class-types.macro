@@ -1,3 +1,3 @@
 export { default } from "./convertFunctionCallToStringMacro";
 
-export { default as postcssClassTypes } from "./postcss";
+export { default as postcss } from "./postcss";
