@@ -8,7 +8,7 @@ export default function postcssClassTypes({ directory = "" } = {}) {
     directory || nodePath.join(appRoot.toString(), "@types", "class-types");
 
   fs.outputFile(
-    nodePath.join(dest, "class-types.d.ts"),
+    nodePath.join(dest, "ct.macro.d.ts"),
     `\
 declare module "ct.macro" {
   const _default: (...args: ClassNames[]) => string;
