@@ -1,6 +1,5 @@
 import { createMacro, MacroError } from "babel-plugin-macros";
 import * as t from "@babel/types";
-import isEqual from "lodash/isEqual";
 import lodashUniq from "lodash/uniq";
 
 export default createMacro(({ references, state }) => {
