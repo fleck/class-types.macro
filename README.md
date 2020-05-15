@@ -99,7 +99,7 @@ function calls are compiled to strings via babel macro!
     
     "bg-blue-200", "flex", "mx-auto"
     
-    in this function: /Users/jfleckenstein/Sites/Webstaurantstore.com/html/template/site2012/lib/js/common/GlobalHeaderContainer/Menu/ShippingMessage.tsx:6:15
+    in this function: /Users/jon/Sites/my-site/Component.tsx:6:15
 ```
 
 ### Editor autocomplete
