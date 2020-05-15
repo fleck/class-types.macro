@@ -90,7 +90,7 @@ function calls are compiled to strings via babel macro!
 <div className="bg-blue-200 flex mx-auto" />
 ```
 
-### Compile time error messages for class order and duplicate classes
+### Compile time error messages for duplicate classes
 
 ```
     👋 Duplicate classes found

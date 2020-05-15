@@ -27,22 +27,14 @@ export default createMacro(({ references, state }) => {
 
     const uniqClasses = lodashUniq(classes);
 
-    const uniq = uniqClasses.length === classes.length;
-
-    const sortedUniqClasses = uniqClasses.concat().sort();
-
-    const sorted = isEqual(uniqClasses, sortedUniqClasses);
-
-    if (!sorted || !uniq) {
+    if (!(uniqClasses.length === classes.length)) {
       throw new MacroError(`
 
-👋 ${!uniq ? "Duplicate classes found" : ""}${!uniq && !sorted ? " and " : ""}${
-        !sorted ? `${!uniq && !sorted ? "c" : "C"}lasses aren't sorted` : ""
-      }
+👋 Duplicate classes found
 
 Please use these classes:
 
-"${sortedUniqClasses.join('", "')}"
+"${uniqClasses.join('", "')}"
 
 in this function: ${state.file.opts.filename}:${
         referencePath.node.loc?.start.line
