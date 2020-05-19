@@ -1,8 +1,7 @@
 import { createMacro, MacroError } from "babel-plugin-macros";
 import * as t from "@babel/types";
-import lodashUniq from "lodash/uniq";
 
-export default createMacro(({ references, state }) => {
+export default createMacro(({ references }) => {
   references.default.forEach(referencePath => {
     let callExpression: t.CallExpression;
 
@@ -23,24 +22,6 @@ export default createMacro(({ references, state }) => {
 
       return argument.value;
     });
-
-    const uniqClasses = lodashUniq(classes);
-
-    if (!(uniqClasses.length === classes.length)) {
-      throw new MacroError(`
-
-👋 Duplicate classes found
-
-Please use these classes:
-
-"${uniqClasses.join('", "')}"
-
-in this function: ${state.file.opts.filename}:${
-        referencePath.node.loc?.start.line
-      }:${referencePath.node.loc?.start.column}
-
-      `);
-    }
 
     if (referencePath.parentPath.parentPath.type === "JSXExpressionContainer") {
       referencePath.parentPath.parentPath.replaceWith(

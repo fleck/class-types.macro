@@ -29,6 +29,37 @@ module.exports = {
 }
 ```
 
+### ESLint setup
+
+Install `eslint-plugin-ct.macro`:
+
+```bash
+yarn add eslint-plugin-ct.macro -D
+```
+
+## Usage
+
+Add `ct.macro` to the plugins section of your `.eslintrc` configuration file. You can omit the `eslint-plugin-` prefix:
+
+```json
+{
+    "plugins": [
+        "ct.macro"
+    ]
+}
+```
+
+
+Then configure the rules you want to use under the rules section.
+
+```json
+{
+    "rules": {
+        "ct.macro/class-order": 2
+    }
+}
+```
+
 ## Usage
 
 ```jsx
@@ -90,20 +121,41 @@ function calls are compiled to strings via babel macro!
 <div className="bg-blue-200 flex mx-auto" />
 ```
 
-### Compile time error messages for duplicate classes
-
-```
-    👋 Duplicate classes found
-    
-    Please use these classes:
-    
-    "bg-blue-200", "flex", "mx-auto"
-    
-    in this function: /Users/jon/Sites/my-site/Component.tsx:6:15
-```
-
 ### Editor autocomplete
 Never wonder again if z-index is incremented by 10 or 100!
 
 ![autocomplete suggestions for z index](assets/autocomplete.png)
 
+### Auto-reorder classes via ESLint plugin/rule
+
+![ESLint auto fix for class order](assets/autofix-class-order.gif)
+
+### Better prettier formatting for long classes
+this
+```jsx
+<div className="absolute overflow-x-hidden inset-x-0 w-11/12 mx-auto mt-5 overflow-y-auto bg-white outline-none border border-gray-300 border-solid rounded shadow-lg opacity-100" />
+```
+
+turns into this:
+
+```jsx
+<div
+  className={ct(
+    "w-11/12",
+    "bg-white",
+    "border-gray-300",
+    "rounded",
+    "border-solid",
+    "border",
+    "shadow-lg",
+    "inset-x-0",
+    "mx-auto",
+    "mt-5",
+    "opacity-100",
+    "outline-none",
+    "overflow-y-auto",
+    "overflow-x-hidden",
+    "absolute"
+  )}
+/>
+```
