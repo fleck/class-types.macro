@@ -37,8 +37,6 @@ Install `eslint-plugin-ct.macro`:
 yarn add eslint-plugin-ct.macro -D
 ```
 
-## Usage
-
 Add `ct.macro` to the plugins section of your `.eslintrc` configuration file. You can omit the `eslint-plugin-` prefix:
 
 ```json
