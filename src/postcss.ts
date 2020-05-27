@@ -3,9 +3,21 @@ import postcssTsClassnames from "postcss-ts-classnames/dist/plugin";
 import nodePath from "path";
 import fs from "fs-extra";
 
-export default function postcssClassTypes({ directory = "" } = {}) {
-  const dest =
-    directory || nodePath.join(appRoot.toString(), "@types", "class-types");
+const typescriptFilename = "classnames.d.ts";
+
+const defaultDirectory = nodePath.join(
+  appRoot.toString(),
+  "@types",
+  "class-types"
+);
+
+export const classnamesPath = nodePath.join(
+  defaultDirectory,
+  typescriptFilename
+);
+
+export default ({ directory = "" } = {}) => {
+  const dest = directory || defaultDirectory;
 
   fs.outputFile(
     nodePath.join(dest, "ct.macro.d.ts"),
@@ -19,6 +31,6 @@ declare module "ct.macro" {
   );
 
   return postcssTsClassnames({
-    dest: nodePath.join(dest, "classnames.d.ts"),
+    dest: nodePath.join(dest, typescriptFilename),
   });
-}
+};
