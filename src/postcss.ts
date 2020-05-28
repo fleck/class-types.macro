@@ -1,4 +1,4 @@
-import appRoot from "app-root-path";
+import * as appRoot from "app-root-path";
 import postcssTsClassnames from "postcss-ts-classnames/dist/plugin";
 import nodePath from "path";
 import fs from "fs-extra";
