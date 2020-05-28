@@ -69,9 +69,9 @@ export default () => <div className={ct("bg-blue-200", "flex", "mx-auto")} />;
 
 The first time you compile your CSS after adding the PostCSS plugin you'll notice 2 files were generated:
 
-`@types/class-types/classnames.d.ts`
+`@types/ct.macro/classnames.d.ts`
 
-`@types/class-types/ct.macro.d.ts`
+`@types/ct.macro/index.d.ts`
 
 You can customize the path where these files are saved by passing a directory option in your postcss config.
 
