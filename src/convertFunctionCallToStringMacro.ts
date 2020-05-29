@@ -2,13 +2,10 @@ import { createMacro, MacroError } from "babel-plugin-macros";
 import * as t from "@babel/types";
 
 export default createMacro(({ references }) => {
-  let keepImports = true;
-
-  references.default.forEach(referencePath => {
+  references.default?.forEach(referencePath => {
     let callExpression: t.CallExpression;
 
     if (referencePath.parentPath.node.type === "CallExpression") {
-      keepImports = false;
       callExpression = referencePath.parentPath.node;
     } else {
       throw new MacroError("ct.macro can only be called as a function");
@@ -32,8 +29,4 @@ export default createMacro(({ references }) => {
       referencePath.parentPath.replaceWith(t.stringLiteral(classes.join(" ")));
     }
   });
-
-  return {
-    keepImports,
-  };
 });
