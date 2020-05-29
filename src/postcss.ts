@@ -11,7 +11,7 @@ export const defaultDirectory = nodePath.join(
 
 export const classnamesFilename = "classnames.d.ts";
 
-export default ({ directory = "" } = {}) => {
+export const postcss = ({ directory = "" } = {}) => {
   const dest = directory || defaultDirectory;
 
   fs.outputFile(
