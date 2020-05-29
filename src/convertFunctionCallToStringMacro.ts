@@ -2,7 +2,10 @@ import { createMacro, MacroError } from "babel-plugin-macros";
 import * as t from "@babel/types";
 
 export default createMacro(({ references }) => {
+  let keepImports = true;
+
   references.default?.forEach(referencePath => {
+    keepImports = false;
     let callExpression: t.CallExpression;
 
     if (referencePath.parentPath.node.type === "CallExpression") {
@@ -29,4 +32,8 @@ export default createMacro(({ references }) => {
       referencePath.parentPath.replaceWith(t.stringLiteral(classes.join(" ")));
     }
   });
+
+  return {
+    keepImports,
+  };
 });
