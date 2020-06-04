@@ -1,3 +1,3 @@
 export { default } from "./convertFunctionCallToStringMacro";
 
-export * from "./postcss";
+export * from "./postcssPlugin";
