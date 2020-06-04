@@ -44,6 +44,7 @@
   },
   "dependencies": {
     "app-root-path": "^3.0.0",
-    "babel-plugin-macros": "^2.8.0"
+    "babel-plugin-macros": "^2.8.0",
+    "postcss": "^7.0.32"
   }
 }
