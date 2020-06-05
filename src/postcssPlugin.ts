@@ -64,7 +64,7 @@ export default _default;
         nodePath.join(dest, "classnames.d.ts"),
         `type ClassNames = "${classes.join('" | "')}"`
       ),
-      fs.outputJSON(nodePath.join(dest, "classnames.json"), classes),
+      fs.outputJSON(nodePath.join(dest, "lintClassnames.json"), classes),
     ]);
   };
 };
