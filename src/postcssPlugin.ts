@@ -5,21 +5,18 @@ import fs from "fs-extra";
 import postcssLib, { plugin } from "postcss";
 
 const parser = createSelectorParser(selectors => {
-  return selectors.nodes
-    .map(selector => {
-      if (selector.type !== "selector") {
-        return "";
-      }
+  selectors.each(selector => {
+    if (selector.type !== "selector") {
+      selector.remove();
+      return;
+    }
 
-      return selector.nodes.map(classNode => {
-        if (classNode.type === "class") {
-          return classNode.toString().slice(1);
-        }
-        return "";
-      });
-    })
-    .filter(sel => sel)
-    .join(" ");
+    for (const node of selector.nodes) {
+      if (node.type !== "class") {
+        node.remove();
+      }
+    }
+  });
 });
 
 export const defaultDirectory = nodePath.join(
@@ -49,7 +46,14 @@ export default _default;
 
     root.walkRules(rule => {
       classes.push(
-        ...parser.processSync(rule.selector, { lossless: false }).split(" ")
+        ...parser
+          .processSync(rule.selector, {
+            lossless: false,
+            updateSelector: false,
+          })
+          .trim()
+          .replace(".", "")
+          .split(" ")
       );
     });
 
