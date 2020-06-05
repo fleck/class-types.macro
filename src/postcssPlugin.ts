@@ -53,7 +53,7 @@ export default _default;
           })
           .trim()
           .replace(".", "")
-          .replace("\\", "")
+          .replace(/\\/g, "")
           .split(" ")
       );
     });
