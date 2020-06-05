@@ -25,7 +25,7 @@ export const defaultDirectory = nodePath.join(
   "ct.macro"
 );
 
-export const classnamesFilename = "classnames.d.ts";
+export const classnamesJSONFilename = "classnamesForLinting.json";
 
 const initializer = ({ directory = "" } = {}) => {
   const dest = directory || defaultDirectory;
@@ -64,7 +64,7 @@ export default _default;
         nodePath.join(dest, "classnames.d.ts"),
         `type ClassNames = "${classes.join('" | "')}"`
       ),
-      fs.outputJSON(nodePath.join(dest, "lintClassnames.json"), classes),
+      fs.outputJSON(nodePath.join(dest, classnamesJSONFilename), classes),
     ]);
   };
 };
