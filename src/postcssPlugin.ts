@@ -1,7 +1,26 @@
 import * as appRoot from "app-root-path";
+import createSelectorParser from "postcss-selector-parser";
 import nodePath from "path";
 import fs from "fs-extra";
 import postcssLib, { plugin } from "postcss";
+
+const parser = createSelectorParser(selectors => {
+  return selectors.nodes
+    .map(selector => {
+      if (selector.type !== "selector") {
+        return "";
+      }
+
+      return selector.nodes.map(classNode => {
+        if (classNode.type === "class") {
+          return classNode.toString().slice(1);
+        }
+        return "";
+      });
+    })
+    .filter(sel => sel)
+    .join(" ");
+});
 
 export const defaultDirectory = nodePath.join(
   appRoot.toString(),
@@ -29,11 +48,9 @@ export default _default;
     const classes: string[] = [];
 
     root.walkRules(rule => {
-      rule.selector.split(",").forEach(subSelector => {
-        /[^.]+$/.exec(subSelector)?.forEach(match => {
-          classes.push(match);
-        });
-      });
+      classes.push(
+        ...parser.processSync(rule.selector, { lossless: false }).split(" ")
+      );
     });
 
     return Promise.all([
