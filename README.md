@@ -113,7 +113,7 @@ function calls are compiled to strings via babel macro!
 
 ```jsx
 // this:
-<div className={cl("bg-blue-200", "flex", "mx-auto")} />
+<div className={ct("bg-blue-200", "flex", "mx-auto")} />
 
 // gets compiled to this:
 <div className="bg-blue-200 flex mx-auto" />
