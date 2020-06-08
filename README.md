@@ -79,7 +79,7 @@ You can customize the path where these files are saved by passing a directory op
 require('ct.macro').postcss({ directory: 'custom-directory/path/' }),
 ```
 
-Treat these files as your would yarn.lock or package-json.lock, commit them when you have changes, but don't edit them by hand.
+Treat these files as you would yarn.lock or package-json.lock, commit them when you have changes, but don't edit them by hand.
 
 ## Why use this library
 
