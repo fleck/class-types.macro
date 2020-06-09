@@ -3,3 +3,4 @@
 node_modules
 dist
 .vscode/settings.json
+@types/ct.macro/

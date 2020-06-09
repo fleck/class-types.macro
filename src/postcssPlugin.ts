@@ -73,6 +73,6 @@ export default _default;
   };
 };
 
-type options = Parameters<typeof initializer>[0];
+export type options = Parameters<typeof initializer>[0];
 
 export const postcss = plugin<options>("postcss-ct.macro", initializer);
