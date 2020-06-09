@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`macros transform jsx string: transform jsx string 1`] = `
+
+import ct from '../../ct.macro';
+    
+<div className={ct("class", "other-class")} />;
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+/*#__PURE__*/
+React.createElement("div", {
+  className: "class other-class",
+});
+
+
+`;

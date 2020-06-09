@@ -34,9 +34,11 @@
   "author": "Jonathan Fleckenstein",
   "module": "dist/ct.macro.esm.js",
   "devDependencies": {
+    "@babel/preset-react": "^7.10.1",
     "@types/app-root-path": "^1.2.4",
     "@types/babel-plugin-macros": "^2.8.1",
     "@types/fs-extra": "^8.1.0",
+    "babel-plugin-tester": "^9.2.0",
     "husky": "^4.2.5",
     "tsdx": "^0.13.2",
     "tslib": "^2.0.0",
