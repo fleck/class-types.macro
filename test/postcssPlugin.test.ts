@@ -28,8 +28,11 @@ it("generates types for classes", async () => {
   expect((await fs.readFile(classNamesPath)).toString()).toMatchSnapshot();
 });
 
-it("does not include ids or pseudo selectors", async () => {
-  await run("#app .mt-1{ } #app .mt-2:hover{}", {});
+it("does not include ids, pseudo selectors, or attributes", async () => {
+  await run(
+    '#app .mt-1{ } #app .mt-2:hover{} [data-reach-slider-input][data-orientation="horizontal"] {}',
+    {}
+  );
 
   expect((await fs.readFile(classNamesPath)).toString()).toMatchSnapshot();
 });

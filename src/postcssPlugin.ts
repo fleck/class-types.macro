@@ -19,11 +19,11 @@ const parser = createSelectorParser(selectors => {
       return;
     }
 
-    for (const node of selector.nodes) {
+    selector.walk(node => {
       if (node.type !== "class") {
         node.remove();
       }
-    }
+    });
   });
 });
 
@@ -58,6 +58,7 @@ export default _default;
           .replace(".", "")
           .replace(/\\/g, "")
           .split(" ")
+          .filter(Boolean)
       );
     });
 
