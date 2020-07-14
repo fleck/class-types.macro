@@ -22,13 +22,13 @@ afterEach(cleanupFiles);
 
 const classNamesPath = path.join(typesDirectory, "ct.macro", "classNames.d.ts");
 
-it("generates types for classes", async () => {
+test("generates types for classes", async () => {
   await run(".mt-1{ } .mt-2{}", {});
 
   expect((await fs.readFile(classNamesPath)).toString()).toMatchSnapshot();
 });
 
-it("does not include ids, pseudo selectors, or attributes", async () => {
+test("does not include ids, pseudo selectors, or attributes", async () => {
   await run(
     '#app .mt-1{ } #app .mt-2:hover{} [data-reach-slider-input][data-orientation="horizontal"] {}',
     {}
@@ -37,10 +37,20 @@ it("does not include ids, pseudo selectors, or attributes", async () => {
   expect((await fs.readFile(classNamesPath)).toString()).toMatchSnapshot();
 });
 
-it("supports custom directories", async () => {
+test("supports custom directories", async () => {
   const directory = path.join(typesDirectory, "custom");
 
   await run("#app .mt-1{ } #app .mt-2:hover{}", { directory });
+
+  expect(
+    (await fs.readFile(path.join(directory, "classNames.d.ts"))).toString()
+  ).toMatchSnapshot();
+});
+
+test("groups", async () => {
+  const directory = path.join(typesDirectory, "custom");
+
+  await run("#td .group:hover .group-hover\\:text-gray-900{}", { directory });
 
   expect(
     (await fs.readFile(path.join(directory, "classNames.d.ts"))).toString()
