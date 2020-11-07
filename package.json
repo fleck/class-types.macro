@@ -1,5 +1,5 @@
 {
-  "version": "0.38.0",
+  "version": "0.39.0",
   "license": "MIT",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -40,7 +40,7 @@
     "@types/fs-extra": "^8.1.0",
     "babel-plugin-tester": "^9.2.0",
     "husky": "^4.2.5",
-    "tsdx": "^0.13.2",
+    "tsdx": "^0.14.1",
     "tslib": "^2.0.0",
     "typescript": "^3.9.2"
   },
