@@ -14,22 +14,18 @@ export default createMacro(({ references }) => {
       throw new MacroError("ct.macro can only be called as a function");
     }
 
-    const classes = callExpression.arguments.map(argument => {
-      if (!("value" in argument)) {
-        throw new MacroError(
-          "Arguments must be strings or convertible to strings (number, boolean)"
-        );
-      }
-
-      return argument.value;
+    const literals = callExpression.arguments.filter(function notEmpty<TValue>(
+      argument: TValue
+    ): argument is Extract<TValue, { value: any }> {
+      return "value" in argument;
     });
 
     if (referencePath.parentPath.parentPath.type === "JSXExpressionContainer") {
       referencePath.parentPath.parentPath.replaceWith(
-        t.stringLiteral(classes.join(" "))
+        t.stringLiteral(literals.join(" "))
       );
     } else {
-      referencePath.parentPath.replaceWith(t.stringLiteral(classes.join(" ")));
+      referencePath.parentPath.replaceWith(t.stringLiteral(literals.join(" ")));
     }
   });
 
