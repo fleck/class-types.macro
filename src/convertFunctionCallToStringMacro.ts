@@ -22,15 +22,13 @@ export default createMacro(({ references }) => {
 
     type Argument = t.CallExpression["arguments"][number];
 
-    // const identifiers = callExpression.arguments.filter(function nonIdentifiers<
-    //   T extends Argument
-    // >(argument: T): argument is Extract<T, { type: "Identifier" }> {
-    //   return "type" in argument && argument.type === "Identifier";
-    // });
+    const identifiers = callExpression.arguments.filter(function nonIdentifiers<
+      T extends Argument
+    >(argument: T): argument is Extract<T, { type: "Identifier" }> {
+      return "type" in argument && argument.type === "Identifier";
+    });
 
     // If any args aren't literals or identifiers throw...
-
-    // let stringLiteral;
 
     let argumentsNode;
 
@@ -40,11 +38,17 @@ export default createMacro(({ references }) => {
       argumentsNode = referencePath.parentPath;
     }
 
-    argumentsNode.replaceWith(t.stringLiteral(literals.join(" ")));
+    let toAdd;
 
-    // t.stringLiteral(literals.join(" ")
+    if (!identifiers.length) {
+      toAdd = t.stringLiteral(literals.map(literal => literal.value).join(" "));
+    } else if (!literals.length && identifiers[0]) {
+      toAdd = identifiers[0];
+    } else {
+      toAdd = t.stringLiteral(literals.map(literal => literal.value).join(" "));
+    }
 
-    // stringLiteral[0].insertAfter(t.binaryExpression("+", t.));
+    argumentsNode.replaceWith(toAdd);
   });
 
   return {

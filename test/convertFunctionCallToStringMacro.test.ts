@@ -23,6 +23,17 @@ pluginTester({
       `,
       output: '"class other-class";',
     },
+    "transform function call with single argument identifier to just an identifier": {
+      code: `
+        import ct from '../../ct.macro';
+
+        const style = ct("class", "other-class");
+  
+        ct(style)
+      `,
+      output: `const style = "class other-class";
+style;`,
+    },
     "transform jsx string": {
       code: `
           import ct from '../../ct.macro';
