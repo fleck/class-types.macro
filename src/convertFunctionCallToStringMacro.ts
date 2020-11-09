@@ -48,7 +48,7 @@ export default createMacro(({ references }) => {
       // multiple identifiers and possible literal
       toAdd = t.binaryExpression(
         "+",
-        identifiers[1],
+        identifiers[0],
         t.binaryExpression("+", t.stringLiteral(" "), identifiers[1])
       );
       // toAdd = t.stringLiteral(literals.map(literal => literal.value).join(" "));

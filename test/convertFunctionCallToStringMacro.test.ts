@@ -42,11 +42,11 @@ style;`,
 
         const style2 = ct("other");
   
-        ct(stylezz, style2);
+        ct(style, style2);
       `,
       output: `const style = "class other-class";
 const style2 = "other";
-style2 + (" " + style2);`,
+style + (" " + style2);`,
     },
     "transform jsx string": {
       code: `
