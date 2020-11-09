@@ -29,10 +29,24 @@ pluginTester({
 
         const style = ct("class", "other-class");
   
-        ct(style)
+        ct(style);
       `,
       output: `const style = "class other-class";
 style;`,
+    },
+    "transform a function call with 2 identifiers to a binary expression": {
+      code: `
+        import ct from '../../ct.macro';
+
+        const style = ct("class", "other-class");
+
+        const style2 = ct("other");
+  
+        ct(stylezz, style2);
+      `,
+      output: `const style = "class other-class";
+const style2 = "other";
+style2 + (" " + style2);`,
     },
     "transform jsx string": {
       code: `
