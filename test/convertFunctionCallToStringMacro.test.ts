@@ -48,6 +48,20 @@ style;`,
 const style2 = "other";
 style + (" " + style2);`,
     },
+    "transform a function call with multiple identifiers and strings": {
+      code: `
+        import ct from '../../ct.macro';
+
+        const style = ct("class", "other-class");
+
+        const style2 = ct("other");
+  
+        ct(style, "classic", style2, "flex", "border");
+      `,
+      output: `const style = "class other-class";
+const style2 = "other";
+"classic flex border" + (" " + (style + (" " + style2)));`,
+    },
     "transform jsx string": {
       code: `
           import ct from '../../ct.macro';
