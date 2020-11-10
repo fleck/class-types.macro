@@ -2,7 +2,7 @@
 
 exports[`macros transform jsx string: transform jsx string 1`] = `
 
-import ct from '../../ct.macro';
+import ct from '../../class-types.macro';
     
 <div className={ct("class", "other-class")} />;
 

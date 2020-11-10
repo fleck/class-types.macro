@@ -5,7 +5,7 @@
   "typings": "dist/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "https://github.com/fleck/ct.macro.git"
+    "url": "https://github.com/fleck/class-types.macro.git"
   },
   "files": [
     "dist",
@@ -30,9 +30,9 @@
     "printWidth": 80,
     "trailingComma": "es5"
   },
-  "name": "ct.macro",
+  "name": "class-types.macro",
   "author": "Jonathan Fleckenstein",
-  "module": "dist/ct.macro.esm.js",
+  "module": "dist/class-types.macro.esm.js",
   "devDependencies": {
     "@babel/preset-react": "^7.10.1",
     "@types/babel-plugin-macros": "^2.8.1",

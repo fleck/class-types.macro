@@ -8,7 +8,7 @@ pluginTester({
     "fail if not a function": {
       error: true,
       code: `
-      import ct from '../../ct.macro';
+      import ct from '../../class-types.macro';
 
       ct({someOption: true}, \`
         some stuff
@@ -17,7 +17,7 @@ pluginTester({
     },
     "transform function call to string": {
       code: `
-        import ct from '../../ct.macro';
+        import ct from '../../class-types.macro';
   
         ct("class", "other-class")
       `,
@@ -25,7 +25,7 @@ pluginTester({
     },
     "transform function call with single argument identifier to just an identifier": {
       code: `
-        import ct from '../../ct.macro';
+        import ct from '../../class-types.macro';
 
         const style = ct("class", "other-class");
   
@@ -36,7 +36,7 @@ style;`,
     },
     "transform a function call with 2 identifiers to a binary expression": {
       code: `
-        import ct from '../../ct.macro';
+        import ct from '../../class-types.macro';
 
         const style = ct("class", "other-class");
 
@@ -50,7 +50,7 @@ style + (" " + style2);`,
     },
     "transform a function call with multiple identifiers and strings": {
       code: `
-        import ct from '../../ct.macro';
+        import ct from '../../class-types.macro';
 
         const style = ct("class", "other-class");
 
@@ -64,7 +64,7 @@ const style2 = "other";
     },
     "transform jsx string": {
       code: `
-          import ct from '../../ct.macro';
+          import ct from '../../class-types.macro';
     
           <div className={ct("class", "other-class")} />;
         `,

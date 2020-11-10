@@ -18,7 +18,9 @@ const ct: macro = createMacro(({ references }) => {
     if (referencePath.parentPath.node.type === "CallExpression") {
       callExpression = referencePath.parentPath.node;
     } else {
-      throw new MacroError("ct.macro can only be called as a function");
+      throw new MacroError(
+        "class-types.macro can only be called as a function"
+      );
     }
 
     const literals = callExpression.arguments.filter(function nonLiterals<T>(
@@ -72,7 +74,7 @@ const ct: macro = createMacro(({ references }) => {
       toAdd = concat(0);
     } else {
       throw new MacroError(
-        "ct.macro requires at least 1 argument and arguments must be literals or identifiers (variables)"
+        "class-types.macro requires at least 1 argument and arguments must be literals or identifiers (variables)"
       );
     }
 

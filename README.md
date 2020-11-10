@@ -1,11 +1,11 @@
-# ct.macro
+# class-types.macro
 
 Types for your CSS classes. This is a combination of a PostCSS plugin and babel macro.
 
 ## Setup
 Add this package:
 ```bash
-yarn add ct.macro
+yarn add class-types.macro
 ```
 
 You may need to add the babel macros plugin: https://github.com/kentcdodds/babel-plugin-macros/blob/master/other/docs/user.md Some projects such as create react app may already have this installed.
@@ -19,7 +19,7 @@ module.exports = {
   plugins: [
     require('tailwindcss'),
 
-    require('ct.macro').postcss(),
+    require('class-types.macro').postcss(),
 
     require('autoprefixer'),
     ...process.env.NODE_ENV === 'production'
@@ -31,18 +31,18 @@ module.exports = {
 
 ### ESLint setup
 
-Install `eslint-plugin-ct.macro`:
+Install `eslint-plugin-class-types.macro`:
 
 ```bash
-yarn add eslint-plugin-ct.macro -D
+yarn add eslint-plugin-class-types.macro -D
 ```
 
-Add `ct.macro` to the plugins section of your `.eslintrc` configuration file. You can omit the `eslint-plugin-` prefix:
+Add `class-types.macro` to the plugins section of your `.eslintrc` configuration file. You can omit the `eslint-plugin-` prefix:
 
 ```json
 {
     "plugins": [
-        "ct.macro"
+        "class-types.macro"
     ]
 }
 ```
@@ -53,7 +53,7 @@ Then configure the rules you want to use under the rules section.
 ```json
 {
     "rules": {
-        "ct.macro/class-order": 2
+        "class-types.macro/class-order": 2
     }
 }
 ```
@@ -62,21 +62,21 @@ Then configure the rules you want to use under the rules section.
 
 ```jsx
 import React from "react";
-import ct from "ct.macro";
+import ct from "class-types.macro";
 
 export default () => <div className={ct("bg-blue-200", "flex", "mx-auto")} />;
 ```
 
 The first time you compile your CSS after adding the PostCSS plugin you'll notice 2 files were generated:
 
-`@types/ct.macro/classNames.d.ts`
+`@types/class-types.macro/classNames.d.ts`
 
-`@types/ct.macro/index.d.ts`
+`@types/class-types.macro/index.d.ts`
 
 You can customize the path where these files are saved by passing a directory option in your postcss config.
 
 ```js
-require('ct.macro').postcss({ directory: 'custom-directory/path/' }),
+require('class-types.macro').postcss({ directory: 'custom-directory/path/' }),
 ```
 
 Treat these files as you would yarn.lock or package-json.lock, commit them when you have changes, but don't edit them by hand.
