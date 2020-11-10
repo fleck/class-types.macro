@@ -1,7 +1,14 @@
 import { createMacro, MacroError } from "babel-plugin-macros";
 import * as t from "@babel/types";
 
-export default createMacro(({ references }) => {
+/**
+ * We include this type so VS Code will auto import this library when a user
+ * types ct. Eventually we can actually export a working implementation for
+ * TypeScript users who don't have babel setup.
+ */
+type macro = () => string;
+
+const ct: macro = createMacro(({ references }) => {
   let keepImports = true;
 
   references.default?.forEach(referencePath => {
@@ -76,3 +83,5 @@ export default createMacro(({ references }) => {
     keepImports,
   };
 });
+
+export default ct;
