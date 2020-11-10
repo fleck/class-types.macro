@@ -40,21 +40,6 @@ export default createMacro(({ references }) => {
 
     let toAdd;
 
-    type AstNode = typeof literals[number] | typeof identifiers[number];
-
-    const concat = (nodes: AstNode[], index: number): t.BinaryExpression => {
-      // 0
-      return t.binaryExpression(
-        "+",
-        nodes[index],
-        t.binaryExpression(
-          "+",
-          t.stringLiteral(" "),
-          nodes[index + 2] ? concat(nodes, index + 1) : nodes[index + 1]
-        )
-      );
-    };
-
     const nodes = literals.length
       ? [
           t.stringLiteral(literals.map(literal => literal.value).join(" ")),
@@ -62,10 +47,22 @@ export default createMacro(({ references }) => {
         ]
       : [...identifiers];
 
+    const concat = (index: number): t.BinaryExpression => {
+      return t.binaryExpression(
+        "+",
+        nodes[index],
+        t.binaryExpression(
+          "+",
+          t.stringLiteral(" "),
+          nodes[index + 2] ? concat(index + 1) : nodes[index + 1]
+        )
+      );
+    };
+
     if (nodes.length === 1) {
       toAdd = nodes[0];
     } else if (nodes.length) {
-      toAdd = concat(nodes, 0);
+      toAdd = concat(0);
     } else {
       throw new MacroError(
         "ct.macro requires at least 1 argument and arguments must be literals or identifiers (variables)"
