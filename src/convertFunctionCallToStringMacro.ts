@@ -41,7 +41,7 @@ const ct: macro = createMacro(({ references }) => {
 
     let argumentsNode;
 
-    if (referencePath.parentPath.parentPath.type === "JSXExpressionContainer") {
+    if (referencePath.parentPath.parentPath.isJSXExpressionContainer()) {
       argumentsNode = referencePath.parentPath.parentPath;
     } else {
       argumentsNode = referencePath.parentPath;
@@ -71,7 +71,11 @@ const ct: macro = createMacro(({ references }) => {
     if (nodes.length === 1) {
       toAdd = nodes[0];
     } else if (nodes.length) {
-      toAdd = concat(0);
+      if (argumentsNode.isJSXExpressionContainer()) {
+        toAdd = t.jsxExpressionContainer(concat(0));
+      } else {
+        toAdd = concat(0);
+      }
     } else {
       throw new MacroError(
         "class-types.macro requires at least 1 argument and arguments must be literals or identifiers (variables)"

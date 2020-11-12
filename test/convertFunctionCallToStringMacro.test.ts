@@ -70,5 +70,15 @@ const style2 = "other";
         `,
       snapshot: true,
     },
+    "transform jsx with variables": {
+      code: `
+          import ct from '../../class-types.macro';
+
+          const style = ct("class", "other-class");
+    
+          <div className={ct("string", style)} />;
+        `,
+      snapshot: true,
+    },
   },
 });

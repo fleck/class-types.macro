@@ -15,3 +15,23 @@ React.createElement("div", {
 
 
 `;
+
+exports[`macros transform jsx with variables: transform jsx with variables 1`] = `
+
+import ct from '../../class-types.macro';
+
+const style = ct("class", "other-class");
+    
+<div className={ct("string", style)} />;
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+const style = "class other-class";
+
+/*#__PURE__*/
+React.createElement("div", {
+  className: "string" + (" " + style),
+});
+
+
+`;
