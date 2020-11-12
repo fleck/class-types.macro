@@ -4,8 +4,18 @@ Types for your CSS classes. This is a combination of a PostCSS plugin and babel 
 
 ## Setup
 Add this package:
+
+with npm
+```bash
+npm i class-types.macro
+
+npm i -D postcss-class-types
+```
+or using yarn
 ```bash
 yarn add class-types.macro
+
+yarn add -D postcss-class-types
 ```
 
 You may need to add the babel macros plugin: https://github.com/kentcdodds/babel-plugin-macros/blob/master/other/docs/user.md Some projects such as create react app may already have this installed.
@@ -18,9 +28,7 @@ Next configure the PostCSS plugin, you'll want to add this after tailwind (or si
 module.exports = {
   plugins: [
     require('tailwindcss'),
-
-    require('class-types.macro').postcss(),
-
+    "postcss-class-types",
     require('autoprefixer'),
     ...process.env.NODE_ENV === 'production'
       ? [purgecss]
@@ -30,11 +38,14 @@ module.exports = {
 ```
 
 ### ESLint setup
+There's an optional, but nice to have eslint plugin that'll give your classes a consistent order.
 
-Install `eslint-plugin-class-types.macro`:
-
+Install `eslint-plugin-class-types`:
 ```bash
-yarn add eslint-plugin-class-types.macro -D
+npm i -D eslint-plugin-class-types
+```
+```bash
+yarn add eslint-plugin-class-types -D
 ```
 
 Add `class-types.macro` to the plugins section of your `.eslintrc` configuration file. You can omit the `eslint-plugin-` prefix:
