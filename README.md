@@ -28,7 +28,7 @@ Next configure the PostCSS plugin, you'll want to add this after tailwind (or si
 module.exports = {
   plugins: [
     require('tailwindcss'),
-    "postcss-class-types",
+    require("postcss-class-types"),
     require('autoprefixer'),
     ...process.env.NODE_ENV === 'production'
       ? [purgecss]
