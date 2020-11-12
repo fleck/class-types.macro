@@ -130,6 +130,33 @@ function calls are compiled to strings via babel macro!
 <div className="bg-blue-200 flex mx-auto" />
 ```
 
+### Style composition without additional CSS
+Tailwind provides the `@apply` directive to make using collections of classes easier. This unfortunately works against utility CSS's promise of no duplicate styles being delivered.
+Class Types solves this problem by allowing users to assign groups of classes to a variable. The variables will also be assigned a union string type containing the classes so you can see what classes are in a given variable.
+```js
+// type: "text-green-500"
+const brandColor = ct(
+  "text-green-500"
+);
+
+// type: "font-medium" | "text-3xl" | "leading-tight" | "tracking-tight" | "sm:text-4xl" | "md:text-5xl" | "xl:text-4xl"
+const heading = ct(
+  "font-medium",
+  "text-3xl",
+  "leading-tight",
+  "tracking-tight",
+  "sm:text-4xl",
+  "md:text-5xl",
+  "xl:text-4xl",
+);
+
+const Page = () => {
+  <main>
+    <h1 className={ct(heading, brandColor, "flex")}></h1>
+  </main>;
+};
+```
+
 ### Editor autocomplete
 Never wonder again if z-index is incremented by 10 or 100!
 
