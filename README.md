@@ -48,12 +48,12 @@ npm i -D eslint-plugin-class-types
 yarn add eslint-plugin-class-types -D
 ```
 
-Add `class-types.macro` to the plugins section of your `.eslintrc` configuration file. You can omit the `eslint-plugin-` prefix:
+Add `class-types` to the plugins section of your `.eslintrc` configuration file. You can omit the `eslint-plugin-` prefix:
 
 ```json
 {
     "plugins": [
-        "class-types.macro"
+        "class-types"
     ]
 }
 ```
@@ -64,7 +64,7 @@ Then configure the rules you want to use under the rules section.
 ```json
 {
     "rules": {
-        "class-types.macro/class-order": 2
+        "class-types/class-order": 2
     }
 }
 ```
