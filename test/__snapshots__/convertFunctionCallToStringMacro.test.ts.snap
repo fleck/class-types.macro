@@ -16,6 +16,26 @@ React.createElement("div", {
 
 `;
 
+exports[`macros transform jsx with ternary and function call to ct: transform jsx with ternary and function call to ct 1`] = `
+
+import ct from '../../class-types.macro';
+
+const style = ct("class", "other-class");
+    
+<div className={ct("string", style, something ? ct("hey") : ct("yo"))} />;
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+const style = "class other-class";
+
+/*#__PURE__*/
+React.createElement("div", {
+  className: "string" + (" " + (style + (" " + (something ? "hey" : "yo")))),
+});
+
+
+`;
+
 exports[`macros transform jsx with variables and function call to ct: transform jsx with variables and function call to ct 1`] = `
 
 import ct from '../../class-types.macro';
@@ -30,7 +50,7 @@ const style = "class other-class";
 
 /*#__PURE__*/
 React.createElement("div", {
-  className: "string" + (" " + (style + (" " + ct("hey", style)))),
+  className: "string" + (" " + (style + (" " + ("hey" + (" " + style))))),
 });
 
 

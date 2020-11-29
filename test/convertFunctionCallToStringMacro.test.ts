@@ -110,5 +110,15 @@ const style2 = "other";
         `,
       snapshot: true,
     },
+    "transform jsx with ternary and function call to ct": {
+      code: `
+          import ct from '../../class-types.macro';
+
+          const style = ct("class", "other-class");
+    
+          <div className={ct("string", style, something ? ct("hey") : ct("yo"))} />;
+        `,
+      snapshot: true,
+    },
   },
 });

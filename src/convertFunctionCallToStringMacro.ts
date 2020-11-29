@@ -46,7 +46,7 @@ const transformArgs = (args: Argument[]) => {
 };
 
 const replace = (
-  callExpressionPath: NodePath<t.Node>,
+  callExpressionPath: NodePath<t.Node> | NodePath<t.CallExpression>,
   callExpression: t.CallExpression
 ) => {
   let toAdd;
@@ -87,25 +87,17 @@ const ct: macro = createMacro(({ references }) => {
 
   references.default?.forEach(referencePath => {
     keepImports = false;
-    let callExpression: t.CallExpression;
 
-    if (referencePath.parentPath.node.type === "CallExpression") {
-      callExpression = referencePath.parentPath.node;
-    } else {
-      throw new MacroError(
-        "class-types.macro can only be called as a function"
-      );
-    }
-
-    let callExpressionPath;
-
-    if (referencePath.parentPath.parentPath.isJSXExpressionContainer()) {
-      callExpressionPath = referencePath.parentPath.parentPath;
-    } else {
-      callExpressionPath = referencePath.parentPath;
-    }
-
-    replace(callExpressionPath, callExpression);
+    referencePath.parentPath.parentPath.traverse({
+      CallExpression: callExpressionPath => {
+        if (
+          callExpressionPath.node.callee.type === "Identifier" &&
+          callExpressionPath.node.callee.name === "ct"
+        ) {
+          replace(callExpressionPath, callExpressionPath.node);
+        }
+      },
+    });
   });
 
   return {
