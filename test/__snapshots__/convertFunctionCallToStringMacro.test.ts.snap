@@ -16,6 +16,66 @@ React.createElement("div", {
 
 `;
 
+exports[`macros transform jsx with variables and function call to ct: transform jsx with variables and function call to ct 1`] = `
+
+import ct from '../../class-types.macro';
+
+const style = ct("class", "other-class");
+    
+<div className={ct("string", style, ct("hey", style))} />;
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+const style = "class other-class";
+
+/*#__PURE__*/
+React.createElement("div", {
+  className: "string" + (" " + (style + (" " + ct("hey", style)))),
+});
+
+
+`;
+
+exports[`macros transform jsx with variables and function call: transform jsx with variables and function call 1`] = `
+
+import ct from '../../class-types.macro';
+
+const style = ct("class", "other-class");
+    
+<div className={ct("string", style, getStyles())} />;
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+const style = "class other-class";
+
+/*#__PURE__*/
+React.createElement("div", {
+  className: "string" + (" " + (style + (" " + getStyles()))),
+});
+
+
+`;
+
+exports[`macros transform jsx with variables and ternary: transform jsx with variables and ternary 1`] = `
+
+import ct from '../../class-types.macro';
+
+const style = ct("class", "other-class");
+    
+<div className={ct("string", style, true ? "this" : "that")} />;
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+const style = "class other-class";
+
+/*#__PURE__*/
+React.createElement("div", {
+  className: "string" + (" " + (style + (" " + (true ? "this" : "that")))),
+});
+
+
+`;
+
 exports[`macros transform jsx with variables: transform jsx with variables 1`] = `
 
 import ct from '../../class-types.macro';

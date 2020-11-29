@@ -80,5 +80,35 @@ const style2 = "other";
         `,
       snapshot: true,
     },
+    "transform jsx with variables and ternary": {
+      code: `
+          import ct from '../../class-types.macro';
+
+          const style = ct("class", "other-class");
+    
+          <div className={ct("string", style, true ? "this" : "that")} />;
+        `,
+      snapshot: true,
+    },
+    "transform jsx with variables and function call": {
+      code: `
+          import ct from '../../class-types.macro';
+
+          const style = ct("class", "other-class");
+    
+          <div className={ct("string", style, getStyles())} />;
+        `,
+      snapshot: true,
+    },
+    "transform jsx with variables and function call to ct": {
+      code: `
+          import ct from '../../class-types.macro';
+
+          const style = ct("class", "other-class");
+    
+          <div className={ct("string", style, ct("hey", style))} />;
+        `,
+      snapshot: true,
+    },
   },
 });
