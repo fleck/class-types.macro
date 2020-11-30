@@ -120,5 +120,17 @@ const style2 = "other";
         `,
       snapshot: true,
     },
+    "transform with MemberExpression": {
+      code: `
+          import ct from '../../class-types.macro';
+
+          const colors = {red: "red-500"};
+
+          const style = ct("class", "other-class");
+    
+          <div className={ct("string", colors["red"], something ? ct("hey") : ct("yo"))} />;
+        `,
+      snapshot: true,
+    },
   },
 });

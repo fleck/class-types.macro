@@ -24,6 +24,7 @@ const transformArgs = (args: Argument[]) => {
     "Identifier",
     "ConditionalExpression",
     "CallExpression",
+    "MemberExpression",
   ] as const;
 
   type AllowedArguments = typeof allowedArguments[number];

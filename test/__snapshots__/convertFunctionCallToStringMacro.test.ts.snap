@@ -115,3 +115,29 @@ React.createElement("div", {
 
 
 `;
+
+exports[`macros transform with MemberExpression: transform with MemberExpression 1`] = `
+
+import ct from '../../class-types.macro';
+
+const colors = {red: "red-500"};
+
+const style = ct("class", "other-class");
+    
+<div className={ct("string", colors["red"], something ? ct("hey") : ct("yo"))} />;
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+const colors = {
+  red: "red-500",
+};
+const style = "class other-class";
+
+/*#__PURE__*/
+React.createElement("div", {
+  className:
+    "string" + (" " + (colors["red"] + (" " + (something ? "hey" : "yo")))),
+});
+
+
+`;
