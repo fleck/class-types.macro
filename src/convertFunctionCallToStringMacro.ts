@@ -12,7 +12,7 @@ type macro = () => string;
 type Argument = t.CallExpression["arguments"][number];
 
 const transformArgs = (args: Argument[]) => {
-  const literals = args.filter(function nonLiterals<T>(
+  const literals = args.filter(function nonLiterals<T extends object>(
     argument: T
   ): argument is Extract<T, { value: any }> {
     return "value" in argument;
