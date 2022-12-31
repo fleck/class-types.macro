@@ -132,5 +132,15 @@ const style2 = "other";
         `,
       snapshot: true,
     },
+    "transform with || operator": {
+      code: `
+          import ct from '../../class-types.macro';
+
+          const props = {className: "red-500"};
+    
+          <div className={ct("string", colors["red"], props.className || "")} />;
+        `,
+      snapshot: true,
+    },
   },
 });

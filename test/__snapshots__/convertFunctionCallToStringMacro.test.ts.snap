@@ -116,6 +116,29 @@ React.createElement("div", {
 
 `;
 
+exports[`macros transform with || operator: transform with || operator 1`] = `
+
+import ct from '../../class-types.macro';
+
+const props = {className: "red-500"};
+    
+<div className={ct("string", colors["red"], props.className || "")} />;
+
+      ↓ ↓ ↓ ↓ ↓ ↓
+
+const props = {
+  className: "red-500",
+};
+
+/*#__PURE__*/
+React.createElement("div", {
+  className:
+    "string" + (" " + (colors["red"] + (" " + (props.className || "")))),
+});
+
+
+`;
+
 exports[`macros transform with MemberExpression: transform with MemberExpression 1`] = `
 
 import ct from '../../class-types.macro';
